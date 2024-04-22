@@ -5,84 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UrSeccChoice</title>
     <style>
-        /* Style CSS bisa dimasukkan di sini */
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
         body {
             font-family: Arial, sans-serif;
+            color: #ffffff;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-           
+            background-image: url(wallpaper.jpg.jpg);
+            background-position: center;
         }
-        header, nav, main, footer {
-            padding: 20px;
+
+        /* Header styles */
+        header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Navigation styles */
+        nav {
             background-color: #070707;
+            padding: 20px;
+            text-align: center;
         }
+
         nav ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
             margin: 0;
         }
+
         nav ul li {
             display: inline;
-            margin-right: 10px;
+            margin-right: 20px;
         }
+
+        nav ul li a {
+            color: #a6d1d4;
+            text-decoration: none;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Footer styles */
         footer {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
             position: fixed;
             bottom: 0;
             width: 100%;
-            text-align: center;
         }
-        /* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: Arial, sans-serif;
-    color: #ffffff;
-    line-height: 1.6;
-    background-image: url(wallpaper.jpg.jpg);
-    background-position: center;
-    
-    
-}
+        /* Comments styles */
+        .comments {
+            position: relative;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333333;
+            border-radius: 5px;
+            max-width: 400px;
+            opacity: 0; /* Mulai dengan opasitas 0 untuk efek fadeIn */
+            animation: fadeIn 1.5s ease forwards; /* Animasi fadeIn */
+        }
 
-header {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 20px 0;
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-nav ul {
-    list-style: none;
-    text-align: center;
-}
+        .comment {
+            margin-bottom: 5px;
+            padding: 5px;
+            background-color: #555555;
+            border-radius: 5px;
+            font-size: 14px;
+        }
 
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
+        /* Form styles */
+        form {
+            margin-top: 20px;
+            text-align: left;
+        }
 
-nav ul li a {
-    color: #060af3;
-    text-decoration: none;
-}
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
 
-.content {
-    padding: 20px;
-    text-align: center;
-}
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #cccccc;
+            font-size: 14px;
+        }
 
-footer {
-    background-color: #0f0f0f;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+        button {
+            padding: 10px 20px;
+            background-color: #060af3;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0451a5;
+        }
     </style>
 </head>
 <body>
@@ -99,10 +151,48 @@ footer {
     </nav>
     <main>
         <h2>Home</h2>
-        <p>Website ini masih biasa saja karena belum paham banyak soal html dll nanti kalo sudah paham keren kok ehhe.</p>
+        <p>Website ini masih biasa saja karena belum paham banyak soal HTML dll. Nanti kalo sudah paham keren kok ehehe.</p>
     </main>
-    <footer>
-        <p>&copy; 2024 My Website. All rights reserved.</p>
-    </footer>
+
+    <div class="comments">
+        <h2>Comments</h2>
+        <div id="commentSection">
+            <!-- Tempat untuk menampilkan komentar -->
+        </div>
+        <!-- Formulir untuk menambahkan komentar -->
+        <form id="commentForm">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="comment">Comment:</label><br>
+            <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var commentForm = document.getElementById('commentForm');
+            var commentSection = document.getElementById('commentSection');
+
+            commentForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Mencegah formulir dikirim secara langsung
+
+                // Mendapatkan nilai dari formulir
+                var name = this.elements['name'].value;
+                var comment = this.elements['comment'].value;
+
+                // Buat elemen untuk komentar baru
+                var newComment = document.createElement('div');
+                newComment.classList.add('comment');
+                newComment.innerHTML = '<strong>' + name + ':</strong> ' + comment;
+
+                // Tambahkan komentar ke bagian komentar
+                commentSection.appendChild(newComment);
+
+                // Reset formulir
+                this.reset();
+            });
+        });
+    </script>
 </body>
 </html>
